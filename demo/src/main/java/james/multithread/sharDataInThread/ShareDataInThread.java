@@ -14,9 +14,9 @@ public class ShareDataInThread {
     public static void main(String[] args) {
         //atomicMethod();
 
-        //volatileMethod();
+        volatileMethod();
 
-        objectMethod();
+        //objectMethod();
     }
 
     private static void objectMethod() {

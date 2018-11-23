@@ -12,7 +12,30 @@ public class ThreadInterruptDemo {
     public static void main(String[] args) throws InterruptedException {
         //interruptMethod();
 
-        recoverInterruptStateMethod();
+        //recoverInterruptStateMethod();
+
+        recoverByExceptionMethod();
+
+        // 或者通过 volatile 修改的变量控制线程停止
+    }
+
+    private static void recoverByExceptionMethod() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+        //TimeUnit.SECONDS.sleep(1);
+        System.out.println("before: " + thread.isInterrupted());
+        thread.interrupt();     // 设置中断标识位
+        //TimeUnit.SECONDS.sleep(1);
+        System.out.println("after: " + thread.isInterrupted());
     }
 
     private static void recoverInterruptStateMethod() throws InterruptedException {
